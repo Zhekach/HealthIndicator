@@ -1,29 +1,12 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
-public class TextIndicator : MonoBehaviour
+public class TextIndicator : HealthIndicator
 {
-    [SerializeField] private Health _health;
     [SerializeField] private TMP_Text _text;
 
-    private void Start()
+    protected override void UpdateInfo()
     {
-        UpdateInfo();
-    }
-
-    private void OnEnable()
-    {
-        _health.OnHealthChanged += UpdateInfo;
-    }
-    
-    private void OnDisable()
-    {
-        _health.OnHealthChanged -= UpdateInfo;
-    }
-
-    private void UpdateInfo()
-    {
-        _text.text = (int)_health.CurrentHealth + "/" + (int)_health.MaxHealth;
+        _text.text = (int)Health.CurrentHealth + "/" + (int)Health.MaxHealth;
     }
 }
