@@ -4,7 +4,7 @@ public abstract class HealthIndicator : MonoBehaviour
 {
     [SerializeField] protected Health Health;
 
-    protected void Start()
+    protected virtual void Start()
     {
         UpdateInfo();
     }

@@ -1,23 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SimpleBarIndicator : HealthIndicator
 {
-    [SerializeField] private Slider _slider;
+    [FormerlySerializedAs("_slider")] [SerializeField] protected Slider Slider;
 
-    private void Start()
+    protected override void Start()
     {
         base.Start();
-        _slider.maxValue = Health.MaxHealth;
+        Slider.maxValue = Health.MaxHealth;
     }
     
     protected override void UpdateInfo()
     {
-        _slider.value = Health.CurrentHealth;
+        Slider.value = Health.CurrentValue;
 
-        if (Health.CurrentHealth == 0)
-            _slider.fillRect.gameObject.SetActive(false);
-        else
-            _slider.fillRect.gameObject.SetActive(true);
+        Slider.fillRect.gameObject.SetActive(Slider.value != 0);
     }
 }
